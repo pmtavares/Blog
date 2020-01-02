@@ -8,7 +8,10 @@ const blogReducer = (state, action) =>
     switch(action.type)
     {
         case 'ADD_BLOG_POST':
-            return [...state, {title: `Blog Post #${state.length + 1}`}];
+            return [
+                ...state, 
+                {id:Math.floor(Math.random() * 9999), title: `Blog Post #${state.length + 1}`}
+            ];
         default:
             return state;
     }
@@ -26,7 +29,7 @@ const addBlogPost = (dispatch) => {
     //const [blogPosts, setBlogPosts] = useState([]);
     const [blogPosts, dispatch] = useReducer(blogReducer,[]);
 
-    /*const addBlogPost = () => {
+    /* //const addBlogPost = () => {
         setBlogPosts([...blogPosts, {title: `Blog Post #${blogPosts.length + 1}`}]);
     } * /
     const addBlogPost = () => {
