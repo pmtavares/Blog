@@ -1,6 +1,7 @@
 import React, {useReducer} from 'react';
 import createDataContext from './createDataContext';
 
+
 //const BlogContext = React.createContext();
 
 const blogReducer = (state, action) =>
@@ -12,6 +13,9 @@ const blogReducer = (state, action) =>
                 ...state, 
                 {id:Math.floor(Math.random() * 9999), title: `Blog Post #${state.length + 1}`}
             ];
+        case 'DELETE_BLOG_POST':
+            console.log("Deleting : ")
+            return state.filter((blogPost) => blogPost.id !== action.payload );
         default:
             return state;
     }
@@ -23,6 +27,13 @@ const addBlogPost = (dispatch) => {
     }
     
 } 
+
+const deleteBlogPost = (dispatch) =>
+{
+    return id => {
+        dispatch({type: 'DELETE_BLOG_POST', payload: id});
+    }
+}
 
 /*export const BlogProvider = ({children})=>
 {
@@ -43,4 +54,4 @@ const addBlogPost = (dispatch) => {
 
 //export default BlogContext;
 
-export const  { Context, Provider} = createDataContext(blogReducer,{addBlogPost}, [] )
+export const  { Context, Provider} = createDataContext(blogReducer,{addBlogPost, deleteBlogPost}, [] )
