@@ -1,7 +1,6 @@
 import React, {useReducer} from 'react';
 import createDataContext from './createDataContext';
 
-
 //const BlogContext = React.createContext();
 
 const blogReducer = (state, action) =>
@@ -33,15 +32,14 @@ const blogReducer = (state, action) =>
 const addBlogPost = (dispatch) => {
     return () => {
         dispatch({type: "ADD_BLOG_POST"});
-    }
-    
+    };    
 } 
 
 const addBlogPostFields = (dispatch) => {
-    return (title, content) => {
+    return (title, content, callback) => {
         dispatch({type: "ADD_BLOG_POST_FIELDS", payload: {title: title, content: content}});
-    }
-    
+        callback();
+    };    
 } 
 
 const deleteBlogPost = (dispatch) =>
